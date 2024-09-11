@@ -1,5 +1,4 @@
-// src/App.js
-import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import ProductRecommendations from './components/ProductRecommendations';
 import Chatbot from './components/Chatbot';
@@ -9,15 +8,17 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <NavBar />
-      <div className="sections">
-        <ProductRecommendations />
-        <Chatbot />
-        <ImageSearch />
-        <SentimentAnalysis />
+    <Router>
+      <div className="App">
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<ProductRecommendations />} />
+          <Route path="/chatbot" element={<Chatbot />} />
+          <Route path="/image-search" element={<ImageSearch />} />
+          <Route path="/sentiment-analysis" element={<SentimentAnalysis />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 
