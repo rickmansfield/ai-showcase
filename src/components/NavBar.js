@@ -1,4 +1,3 @@
-// src/components/NavBar.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
@@ -8,7 +7,7 @@ function NavBar() {
     <nav className="navbar">
       <ul className="nav-links">
         <li>
-          <Link to="/">Product Recommendations</Link>
+          <Link to="/product-recommendations">AI Product Solution</Link>
         </li>
         <li>
           <Link to="/chatbot">AI Chatbot</Link>
