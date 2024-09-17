@@ -13,18 +13,15 @@ function ECommerceProductRecommendations() {
   }, []);
 
   return (
-    <div className="product-recommendations">
-      <h2>Ecommerce Product Recommendations</h2>
-      <div className="products-grid">
-        {products.map((product) => (
-          <div className="product-card" key={product.id}>
-            <img src={product.image} alt={product.title} />
-            <h3>{product.title}</h3>
-            <p>{product.description}</p>
-            <p><strong>Price:</strong> ${product.price}</p>
-          </div>
-        ))}
-      </div>
+    <div className="ecommerce-products-grid">
+      {products.map((product) => (
+        <div className="ecommerce-product-card" key={product.id}>
+          <img src={product.image} alt={product.title} />
+          <h3>{product.title}</h3>
+          <p>{product.description}</p>
+          <p><strong>Price:</strong> ${product.price}</p>
+        </div>
+      ))}
     </div>
   );
 }
