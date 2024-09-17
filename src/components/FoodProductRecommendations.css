@@ -1,0 +1,56 @@
+.food-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.food-product-card {
+  background-color: #fffaf0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  padding: 15px;
+  transition: transform 0.3s ease;
+}
+
+.food-product-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.food-product-card:hover {
+  transform: scale(1.05);
+}
+
+.food-product-card h3 {
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+
+.food-product-card p {
+  font-size: 1rem;
+  color: #444;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .food-products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .food-product-card h3 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .food-products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .food-product-card h3 {
+    font-size: 1.8rem;
+  }
+}
