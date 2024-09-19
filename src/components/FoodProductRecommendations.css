@@ -33,24 +33,12 @@
   background-color: #21a1f1;
 }
 
-/* Grid layout for food products */
+/* Corrected class name for grid layout */
 .food-products-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjusted to allow more items per row */
   gap: 20px;
   padding: 20px;
-}
-
-@media (min-width: 768px) {
-  .food-products-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  }
-}
-
-@media (min-width: 1024px) {
-  .food-products-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
 }
 
 /* Container for product card */
@@ -83,7 +71,7 @@
 .food-product-card img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Ensures the image scales and crops correctly */
   border-radius: 10px;
 }
 
@@ -105,24 +93,9 @@
   overflow: hidden;
 }
 
-/* Read more button */
-.read-more-btn {
-  background: none;
-  border: none;
-  color: #61dafb;
-  cursor: pointer;
-  font-size: 1rem;
-  text-decoration: underline;
-  padding-left: 5px;
-}
-
-.read-more-btn:hover {
-  color: #21a1f1;
-}
-
-/* Responsive design for mobile-first approach */
+/* Responsive design */
 @media (max-width: 768px) {
   .food-products-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Single column on smaller screens */
   }
 }
