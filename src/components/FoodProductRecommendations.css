@@ -11,7 +11,8 @@
 }
 
 .food-search-input {
-  width: 300px;
+  width: 100%;
+  max-width: 300px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -35,9 +36,21 @@
 /* Grid layout for food products */
 .food-products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: 1fr;
   gap: 20px;
   padding: 20px;
+}
+
+@media (min-width: 768px) {
+  .food-products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .food-products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
 }
 
 /* Container for product card */
@@ -45,18 +58,21 @@
   background-color: #fffaf0;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: left;
   padding: 15px;
-  height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100%;
   transition: transform 0.3s ease;
 }
 
-/* Image container with limited height */
-.food-product-card .image-container {
-  height: 150px;  /* Set a fixed height for image container */
+.food-product-card:hover {
+  transform: scale(1.05);
+}
+
+/* Image container */
+.image-container {
+  height: 150px; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,17 +83,15 @@
 .food-product-card img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures the image scales and crops correctly */
+  object-fit: cover;
   border-radius: 10px;
 }
 
-.food-product-card:hover {
-  transform: scale(1.05);
-}
-
+/* Title and brand styling */
 .food-product-card h3 {
   font-size: 1.5rem;
   margin: 10px 0;
+  text-align: left;
 }
 
 .food-product-card p {
@@ -85,12 +99,13 @@
   color: #444;
   margin-bottom: 10px;
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* Limits to 3 lines */
+  -webkit-line-clamp: 3; /* Limit text to 3 lines */
   line-clamp: 3; /* Standard property for compatibility */
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
+/* Read more button */
 .read-more-btn {
   background: none;
   border: none;
@@ -104,31 +119,8 @@
 .read-more-btn:hover {
   color: #21a1f1;
 }
-/* Recommendation section */
-.recommendation {
-  font-size: 1.1rem;
-  margin-top: 10px;
-  background-color: #e6f7e6;
-  padding: 10px;
-  border-radius: 5px;
-  color: #2b8a3e;
-  text-align: left;
-}
 
-/* Low score warning */
-.recommendation.low {
-  background-color: #ffe6e6;
-  color: #d92929;
-}
-
-/* Neutral score warning */
-.recommendation.neutral {
-  background-color: #fff9e6;
-  color: #d9a329;
-}
-
-
-/* Responsive design */
+/* Responsive design for mobile-first approach */
 @media (max-width: 768px) {
   .food-products-grid {
     grid-template-columns: 1fr;
