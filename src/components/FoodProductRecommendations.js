@@ -1,8 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './FoodProductRecommendations.css';
-
-// Import dotenv (if using Node.js environment, but for React, use REACT_APP_ prefix)
-// require('dotenv').config(); -> Not needed for React apps, as create-react-app uses REACT_APP prefix
 
 function FoodProductRecommendations() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -10,42 +7,44 @@ function FoodProductRecommendations() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (searchTerm) {
-      setIsLoading(true);
-      setError(null);
-
-      fetch(
-        // `https://world.openfoodfacts.org/api/v0/search.json?search_terms=${searchTerm}&fields=product_name,brands,ingredients_text,image_url,nutrition_grades_tags,nutrition_score_debug,ecoscore_grade,ecoscore_score`,
-        `https://world.openfoodfacts.net/api/v0/search.json?search_terms=thai&json=true
-`,
-        
-        {
-        headers: {
-          'User-Agent': process.env.REACT_APP_USER_AGENT // Custom User-Agent from .env
-        }
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setProducts(data.products || []);
-          setIsLoading(false);
-          console.log('data.products', data);
-        })
-        .catch((err) => {
-          console.log('Error: ', err); // log the error message
-          setError('Error fetching data. Please try again.');
-          setIsLoading(false);
-        });
-        
-    }
-  }, [searchTerm]);
-
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
   const handleSearchSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission behavior
+    setIsLoading(true);
+    setError(null);
+
+    // fetch(`https://world.openfoodfacts.org/api/v0/search.json?search_terms=${searchTerm}&fields=product_name,brands,ingredients_text,image_url,nutrition_grades_tags,nutrition_score_debug,ecoscore_grade,ecoscore_score&nocache=1`, {
+    //   headers: {
+    //     'User-Agent': `${process.env.REACT_APP_APP_NAME}/${process.env.REACT_APP_APP_VERSION} (${process.env.REACT_APP_CONTACT_EMAIL})`
+    //   }
+  // })
+  fetch(`https://world.openfoodfacts.org/api/v0/search.json?search_terms=spaghetti&fields=product_name,brands,ingredients_text,image_url,nutrition_grades_tags,nutrition_score_debug,ecoscore_grade,ecoscore_score&nocache=1`, {
+    headers: {
+      'User-Agent': `${process.env.REACT_APP_APP_NAME}/${process.env.REACT_APP_APP_VERSION} (${process.env.REACT_APP_CONTACT_EMAIL})`
+    }
+  })
+  
+    
+    .then((res) => {
+        console.log('res', res);
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setProducts(data.products || []);
+        setIsLoading(false);
+        console.log('data', data);
+      })
+      .catch((err) => {
+        console.error('Fetch error:', err);
+        setError('Error fetching data. Please try again.');
+        setIsLoading(false);
+      });
   };
 
   return (
