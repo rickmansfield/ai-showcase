@@ -15,16 +15,16 @@ function FoodProductRecommendations() {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
-    
+
     fetch(`https://world.openfoodfacts.org/cgi/search.pl?search_terms=${searchTerm}&search_simple=1&action=process&json=1`, {
       headers: {
         'User-Agent': `${process.env.REACT_APP_APP_NAME}/${process.env.REACT_APP_APP_VERSION} (${process.env.REACT_APP_CONTACT_EMAIL})`
       }
     }
     )
-  
-    
-    .then((res) => {
+
+
+      .then((res) => {
         console.log('res', res);
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
@@ -60,17 +60,21 @@ function FoodProductRecommendations() {
       {isLoading && <p>Loading...</p>}
       {error && <p>{error}</p>}
 
-      <div className="products-grid">
+      <div className="food-products-grid">
         {products.map((product, index) => (
           <div className="product-card" key={index}>
-            <img src={product.image_url} alt={product.product_name} />
+            <div className="image-container">
+              <img src={product.image_url} alt={product.product_name} />
+            </div>
             <h3>{product.product_name}</h3>
-            <p>{product.brands}</p>
-            <p>Nutri-Score: {product.nutrition_grades_tags?.[0]?.toUpperCase() || 'N/A'}</p>
-            <p>Eco-Score: {product.ecoscore_grade?.toUpperCase() || 'N/A'}</p>
+            <p><strong>Brand:</strong> {product.brands}</p>
+            <p><strong>Nutri-Score:</strong> {product.nutrition_grades_tags?.[0]?.toUpperCase() || 'N/A'}</p>
+            <p><strong>Eco-Score:</strong> {product.ecoscore_grade?.toUpperCase() || 'N/A'}</p>
+            <p><strong>Allergens:</strong> {product.allergens || 'None listed'}</p>
           </div>
         ))}
       </div>
+
     </div>
   );
 }
