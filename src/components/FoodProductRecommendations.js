@@ -12,20 +12,16 @@ function FoodProductRecommendations() {
   };
 
   const handleSearchSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
+    e.preventDefault();
     setIsLoading(true);
     setError(null);
-
-    // fetch(`https://world.openfoodfacts.org/api/v0/search.json?search_terms=${searchTerm}&fields=product_name,brands,ingredients_text,image_url,nutrition_grades_tags,nutrition_score_debug,ecoscore_grade,ecoscore_score&nocache=1`, {
-    //   headers: {
-    //     'User-Agent': `${process.env.REACT_APP_APP_NAME}/${process.env.REACT_APP_APP_VERSION} (${process.env.REACT_APP_CONTACT_EMAIL})`
-    //   }
-  // })
-  fetch(`https://world.openfoodfacts.org/api/v0/search.json?search_terms=spaghetti&fields=product_name,brands,ingredients_text,image_url,nutrition_grades_tags,nutrition_score_debug,ecoscore_grade,ecoscore_score&nocache=1`, {
-    headers: {
-      'User-Agent': `${process.env.REACT_APP_APP_NAME}/${process.env.REACT_APP_APP_VERSION} (${process.env.REACT_APP_CONTACT_EMAIL})`
+    
+    fetch(`https://world.openfoodfacts.org/cgi/search.pl?search_terms=${searchTerm}&search_simple=1&action=process&json=1`, {
+      headers: {
+        'User-Agent': `${process.env.REACT_APP_APP_NAME}/${process.env.REACT_APP_APP_VERSION} (${process.env.REACT_APP_CONTACT_EMAIL})`
+      }
     }
-  })
+    )
   
     
     .then((res) => {
