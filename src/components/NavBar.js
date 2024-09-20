@@ -7,6 +7,9 @@ function NavBar() {
     <nav className="navbar">
       <ul className="nav-links">
         <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
           <Link to="/product-recommendations">AI Product Solution</Link>
         </li>
         <li>
