@@ -1,10 +1,11 @@
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
-import ProductRecommendationsLanding from './components/ProductRecommendationsLanding';
+import HomePage from './Pages/Home';
+import EcommerceProductRecommendations from './components/ECommerceProductRecommendations';
+import FoodProductRecommendations from './components/FoodProductRecommendations';
 import Chatbot from './components/Chatbot';
 import ImageSearch from './components/ImageSearch';
-import SentimentAnalysis from './components/SentimentAnalysis';
-import './App.css';
 
 function App() {
   return (
@@ -12,11 +13,12 @@ function App() {
       <div className="App">
         <NavBar />
         <Routes>
-        <Route path="/product-recommendations" element={<ProductRecommendationsLanding />} />
-        <Route path="/product-recommendations/:type" element={<ProductRecommendationsLanding />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/product-recommendations" element={<EcommerceProductRecommendations />} />
+          <Route path="/ecommerce-recommendations" element={<EcommerceProductRecommendations />} />
+          <Route path="/sentiment-analysis" element={<FoodProductRecommendations />} />
           <Route path="/chatbot" element={<Chatbot />} />
           <Route path="/image-search" element={<ImageSearch />} />
-          <Route path="/sentiment-analysis" element={<SentimentAnalysis />} />
         </Routes>
       </div>
     </Router>
