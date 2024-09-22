@@ -41,5 +41,6 @@
   "devDependencies": {
     "cross-env": "^7.0.3",
     "standard-version": "^9.5.0"
-  }
+  },
+  "homepage": "https://ai-showcase-dblbde78s-william-mansfields-projects.vercel.app"
 }
