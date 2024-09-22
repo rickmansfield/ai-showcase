@@ -1,0 +1,46 @@
+/* General layout and typography */
+.product-recommendations {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.recommendation-options {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.recommendation-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.recommendation-buttons button {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #61dafb;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.recommendation-buttons button:hover {
+  background-color: #21a1f1;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .recommendation-options {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .recommendation-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

@@ -1,0 +1,101 @@
+/* Food product search styles */
+.food-product-search {
+  text-align: center;
+  padding: 20px;
+}
+
+.food-search-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.food-search-input {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-right: 10px;
+}
+
+.food-search-button {
+  padding: 10px 20px;
+  background-color: #61dafb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.food-search-button:hover {
+  background-color: #21a1f1;
+}
+
+/* Corrected class name for grid layout */
+.food-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjusted to allow more items per row */
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Container for product card */
+.food-product-card {
+  background-color: #fffaf0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.food-product-card:hover {
+  transform: scale(1.05);
+}
+
+/* Image container */
+.image-container {
+  height: 150px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.food-product-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image scales and crops correctly */
+  border-radius: 10px;
+}
+
+/* Title and brand styling */
+.food-product-card h3 {
+  font-size: 1.5rem;
+  margin: 10px 0;
+  text-align: left;
+}
+
+.food-product-card p {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit text to 3 lines */
+  line-clamp: 3; /* Standard property for compatibility */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .food-products-grid {
+    grid-template-columns: 1fr; /* Single column on smaller screens */
+  }
+}
