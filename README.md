@@ -71,4 +71,3 @@ Feel free to modify or experiment with the AI Showcase project. Here are a few i
 - Customize the UI to match your or your client's brand.
 - Integrate additional AI APIs from platforms like AWS AI or Microsoft Cognitive Services.
 
-This is another test
