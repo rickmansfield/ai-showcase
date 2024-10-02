@@ -18,7 +18,7 @@ export default function Footer() {
             src={`${process.env.PUBLIC_URL}/images/footer-illustration.svg`}
             alt="Footer illustration"
             width={1076}
-            height={378}
+            height={300}
           />
         </div>
 
