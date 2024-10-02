@@ -11,7 +11,7 @@ function CoreExamples() {
     { title: 'Image Search', path: '/image-search', image: 'images/workflow-01.png' },
   ];
   return (
-    <div className="home-page">
+    <div className="core-examples">
     <h1>Welcome to Our AI-Powered Solutions</h1>
     <div className="feature-grid">
       {features.map((feature, index) => (
