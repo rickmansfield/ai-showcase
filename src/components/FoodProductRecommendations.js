@@ -27,7 +27,7 @@ function FoodProductRecommendations() {
 
     // Perform sentiment analysis first by calling the Express server
     //A POST request is used when you need to send data to a server to create or update a resource. In our case, we're sending a piece of text (the search term) to our Express server for sentiment analysis. This is part of a RESTful API design where the POST request is used to send data to the server.
-    fetch(`${apiUrl}/analyze-sentiment`,{
+    fetch(`${apiUrl}`,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
