@@ -14,8 +14,8 @@ function FoodProductRecommendations() {
     setSearchTerm(e.target.value);
   };
 
-    // Determine the API URL based on the environment
-    const apiUrl = process.env.NODE_ENV === 'production'
+  // Determine the API URL based on the environment
+  const apiUrl = process.env.NODE_ENV === 'production'
     ? process.env.REACT_APP_API_URL_PROD
     : process.env.REACT_APP_API_URL_DEV;
 
@@ -24,46 +24,51 @@ function FoodProductRecommendations() {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
-
+  
     // Perform sentiment analysis first by calling the Express server
-    //A POST request is used when you need to send data to a server to create or update a resource. In our case, we're sending a piece of text (the search term) to our Express server for sentiment analysis. This is part of a RESTful API design where the POST request is used to send data to the server.
-    fetch(`${apiUrl}`,{
+    fetch(apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ text: searchTerm }), // Send search term for sentiment analysis
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then((data) => {
+        if (!data || typeof data.sentiment === 'undefined') {
+          throw new Error('Invalid response from sentiment analysis API');
+        }
         setSentiment(data.sentiment); // Store the sentiment score
         console.log('Sentiment analysis result:', data);
-
+  
         // After sentiment analysis, make the Open Food Facts API call
-        fetch(`https://world.openfoodfacts.org/cgi/search.pl?search_terms=${searchTerm}&search_simple=1&action=process&json=1`, {
+        return fetch(`https://world.openfoodfacts.org/cgi/search.pl?search_terms=${searchTerm}&search_simple=1&action=process&json=1`, {
           headers: {
             'User-Agent': `${process.env.REACT_APP_APP_NAME}/${process.env.REACT_APP_APP_VERSION} (${process.env.REACT_APP_CONTACT_EMAIL})`,
           },
-        })
-          .then((res) => {
-            if (!res.ok) {
-              throw new Error(`HTTP error! status: ${res.status}`);
-            }
-            return res.json();
-          })
-          .then((data) => {
-            setProducts(data.products || []); // Store the fetched products
-            setIsLoading(false); // Stop loading
-          })
-          .catch((err) => {
-            console.error('Fetch error:', err);
-            setError('Error fetching data. Please try again.');
-            setIsLoading(false);
-          });
+        });
+      })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (!data || !data.products) {
+          throw new Error('Invalid response from Open Food Facts API');
+        }
+        setProducts(data.products || []); // Store the fetched products
+        setIsLoading(false); // Stop loading
       })
       .catch((err) => {
-        console.error('Sentiment analysis error:', err);
-        setError('Error performing sentiment analysis. Please try again.');
+        console.error('Fetch error:', err);
+        setError('Error fetching data. Please try again.');
         setIsLoading(false);
       });
   };
@@ -88,9 +93,6 @@ function FoodProductRecommendations() {
       {error && <p>{error}</p>}
 
       {/* Display sentiment analysis result */}
-      <p>
-      
-      </p>
       {sentiment !== null && (
         <div className="sentiment-result">
           <h3>AI Sentiment Score</h3>
