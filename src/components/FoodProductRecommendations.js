@@ -14,6 +14,11 @@ function FoodProductRecommendations() {
     setSearchTerm(e.target.value);
   };
 
+    // Determine the API URL based on the environment
+    const apiUrl = process.env.NODE_ENV === 'production'
+    ? process.env.REACT_APP_API_URL_PROD
+    : process.env.REACT_APP_API_URL_DEV;
+
   // Handle form submission
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +27,7 @@ function FoodProductRecommendations() {
 
     // Perform sentiment analysis first by calling the Express server
     //A POST request is used when you need to send data to a server to create or update a resource. In our case, we're sending a piece of text (the search term) to our Express server for sentiment analysis. This is part of a RESTful API design where the POST request is used to send data to the server.
-    fetch('http://localhost:5000/analyze-sentiment', {
+    fetch(`${apiUrl}`,{
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
