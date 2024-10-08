@@ -26,7 +26,7 @@ function FoodProductRecommendations() {
     setError(null);
   
     // Perform sentiment analysis first by calling the Express server
-    fetch(`${apiUrl}/analyze-sentiment`, {
+    fetch(`${apiUrl}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
